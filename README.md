@@ -173,3 +173,29 @@ La excepción SVC se relaciona con el resto de las excepciones en que es una exc
 Ejemplo:
 
 En un sistema operativo embebido con dos tareas, una tarea puede utilizar la excepción SVC para crear otra tarea. Para ello, la primera tarea puede generar la excepción SVC y pasar como parámetro la dirección de la función de inicialización de la nueva tarea.
+
+## ISA
+
+### 1  ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo
+
+Los sufijos son modificadores que se le pueden agregar a ciertas instrucciones, con el fin de modificar su comportamiento. Un ejemplo puede ser la instrucción mov y el modificador h, que lo que genera es que la instruccion copie un registro, pero transformandolo en uno de 16 bits.
+
+
+### 2 . ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo
+
+El sufijo s, se utiliza para indicarle al procesador que dada la instrucción a ejecutar, también actualize los flags del APSR. Por ejemplo, la instruccion add, si se le agrega el sufijo s, queda de la siguiente manera: adds r1,r2,r3 y luego de realizar la suma actualiza los flags.
+
+### 3 ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.
+
+Las instrucciones de aritméticas saturadas son útiles para trabajar con señales, ya que en caso de excederse del valor límite, se podriía distorcionar la forma de onda de forma completa. Para el caso de datos de 8 bits, los valores posibles oscilan entre el 0 y el 255. En caso de exceder estos valores, la aritmetica los fuerza a que permanezcan en ese valor maximo (o mínimo)
+
+
+### 4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?
+
+Se puede intercalar codigo en c y en assembly sin ningun problema. Las funciones en assembly reciben los parámetros en los primeros 4 registros de proposito general (r0,r1,r2,r3). Luego, durante la ejecucion de la misma se pueden utilizar todos los registros, siempre y cuando antes de usarlo se backupee, para restaurarlos antes de retomar el thread. 
+Para el caso de devolver valores, el valor a retornar se carga en el registro r0.
+
+### 5. ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.
+
+
+Una instrucción SIMD (Single Instruction, Multiple Data) es una instrucción que permite realizar la misma operación sobre varios datos en paralelo. Esto se consigue mediante el uso de un conjunto de unidades de ejecución que pueden procesar datos de forma simultánea. Por ejemplo la instrucción SMUAD lo que realiza es multiplica dos numeros de 16-bits, para despues sumarlos y devolver un número de 32-bits.
